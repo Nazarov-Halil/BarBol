@@ -1,0 +1,12 @@
+
+# Env
+env/
+myvenv/
+venv/
+
+# Database
+db.sqlite3
+__pycache__/
+# Static folder at project root
+media/
+.idea/
