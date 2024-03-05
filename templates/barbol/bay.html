@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    {% include 'base/navigation.html' %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Оформить заказ</button>
+        </form>
+    {% include 'base/footer.html' %}
+{% endblock %}

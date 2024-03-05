@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+{% block content %}
+	{% include 'base/navigation.html' %}
+    {% include 'base/header.html' %}
+    <section class="h-100 h-custom" style="background-color: #d2c9ff;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+              <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                <div class="card-body p-0">
+                  <div class="row g-0">
+                    <div class="col-lg-8" style="width: 100%;">
+                      <div class="p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                          <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                          <h6 class="mb-0 text-muted">3 items</h6>
+                        </div>
+                            <hr class="my-4">
+                      
+                          {% for cart_item in card.items.all %}
+                            <div class="row mb-4 d-flex justify-content-between align-items-center">
+                              <div class="col-md-2 col-lg-2 col-xl-2">
+                                <img
+                                  src="{{ cart_item.tort.tort_image.url }}"
+                                  class="img-fluid rounded-3" alt="">
+                                  <img
+                                  src="{{ cart_item.flour.flour_image.url }}"
+                                  class="img-fluid rounded-3" alt="">
+                              </div>
+                              <div class="col-md-3 col-lg-3 col-xl-3">
+                                <h6 class="text-black mb-0">{{ cart_item.tort.title }}</h6>
+                                <h6 class="text-black mb-0">{{ cart_item.flour.title }}</h6>
+                              </div>
+                              <div class="col-md-3 col-lg-3 col-xl-2 d-flex" style="padding-left: 60px;">
+                                <a href="{% url 'minus_quantity' cart_item.id %}" style="color: black; text-decoration: none; margin-right: 20px;">
+                                    <h4>-</h4>
+                                </a>
+                                <p>
+                                    <h3>{{ cart_item.quantity }}</h3>
+                                </p>
+                                <a href="{% url 'pilus_quantity' cart_item.id %}" style="color: black; text-decoration: none; margin-left: 20px;">
+                                    <h4>+</h4>
+                                </a>
+                              </div>
+                              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                <h6 class="mb-0">{{ cart_item.sum_quantity }}</h6>
+                              </div>
+                              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                              </div>
+                            </div>
+                          {% endfor %}
+                      
+                            <hr class="my-4">
+                        <div class="pt-5" style="display: flex; align-items: center; justify-content: space-around;">
+                          <h6 class="mb-0">
+                              <a href="../index.html" class="text-body">
+                              <i class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                            <p>{{ total_sum }}</p>
+                            <a href="{% url 'order' %}" style="text-decoration: none; background-color: green; color: white; padding: 10px; border-radius: 15px;"><h4>Оформить заказ</h4></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+        <!-- Footer-->
+    {% include 'base/footer.html' %}
+{% endblock %}

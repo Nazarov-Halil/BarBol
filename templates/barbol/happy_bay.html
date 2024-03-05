@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+{% block content %}
+	{% include 'base/navigation.html' %}
+    {% include 'base/header.html' %}
+    <h1>{{ username }}Ваш Заказ успешно оформлен</h1>
+        <a href="{% url 'main_list' %}">
+            <button type="submit">
+                Вернуться в главный страницу
+            </button>
+        </a>
+    {% include 'base/footer.html' %}
+{% endblock %}

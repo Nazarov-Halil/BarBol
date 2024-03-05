@@ -6,7 +6,7 @@ from apps.flour.models import Flour
 
 class FlourListView(ListView):
     model = Flour
-    template_name = 'flour.html'
+    template_name = 'flour-html/flour.html'
     context_object_name = 'flour'
     paginate_by = 12
 
@@ -30,7 +30,7 @@ class FlourListView(ListView):
 
 class FlourDetailView(DetailView):
     model = Flour
-    template_name = 'flour_detail.html'
+    template_name = 'flour-html/flour_detail.html'
     pk_url_kwarg = 'pk'
     context_object_name = 'flour_detail'
 
