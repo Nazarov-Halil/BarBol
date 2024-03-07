@@ -10,7 +10,7 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tort_list'] = Tort.objects.all()[:8]  # Получаем первые 8 элементов из модели Tort
+        context['tort_detail'] = Tort.objects.all()[:8]  # Получаем первые 8 элементов из модели Tort
         context['flour_list'] = Flour.objects.all()[:8]  # Получаем первые 8 элементов из модели Flour
         return context
 

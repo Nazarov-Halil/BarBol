@@ -8,7 +8,7 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <h1 class="title-container">Торты на ваш вкус</h1>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for item in tort_list %}
+                    {% for item in tort_detail %}
                         <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
@@ -17,7 +17,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <a href="barbol/detail.html" style="text-decoration: none; color: black;"><h5 class="fw-bolder">{{ item.title }}</h5></a>
+                                    <a href="{% url 'tort_list' %}" style="text-decoration: none; color: black;"><h5 class="fw-bolder">{{ item.title }}</h5></a>
                                     <!-- Product price-->
                                     {{ item.price }}
                                 </div>
@@ -25,7 +25,7 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" href="#"><span id="product-add-cart">Добавить в корзину</span></a>
+                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'add_to_cart' item.id %}"><span id="product-add-cart">Добавить в корзину</span></a>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,8 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    
+                                    <a href="{% url 'tort_list' %}" style="text-decoration: none; color: black;"><h5 class="fw-bolder">{{ item.title }}</h5></a>
                                     <!-- Product price-->
                                     $40.00 - $80.00
                                 </div>
@@ -55,7 +56,7 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" href="#"><span id="product-add-cart">Добавить в корзину</span><span id="product-add">В корзину</span></a>
+                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'add_to_cart_flour' item.id %}"><span id="product-add-cart">Добавить в корзину</span></a>
                                 </div>
                             </div>
                         </div>

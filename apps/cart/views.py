@@ -1,3 +1,4 @@
+from django.db.models import Q, QuerySet
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
@@ -41,6 +42,23 @@ class QuantityChangeLogics:
         item.quantity += 1
         item.save()
         return redirect('detail_card')
+class QuantityChangeLogicsFlour:
+    @staticmethod
+    def minus_quantity_flour(request, pk):
+        item = CardItemFlour.objects.get(id=pk)
+        if item.quantity - 1 == 0:
+            item.delete()
+            return redirect('detail_card')
+        item.quantity -= 1
+        item.save()
+        return redirect('detail_card')
+
+    @staticmethod
+    def pilus_quantity_flour(request, pk):
+        item = CardItemFlour.objects.get(id=pk)
+        item.quantity += 1
+        item.save()
+        return redirect('detail_card')
 
 
 def create_cart_item(request, pk):
@@ -64,18 +82,16 @@ def create_cart_item(request, pk):
 
 def create_cart_item_flour(request, pk):
     hash = request.session.get("_auth_user_hash")
-
     if Card.objects.filter(user_session=hash).exists():
         card = Card.objects.get(user_session=hash)
     else:
         card = Card.objects.create(
             user_session=hash
         )
-
     flour = Flour.objects.get(id=pk)
     CardItemFlour.objects.create(
         card=card,
-        tort=flour,
+        flour=flour,
     )
 
     return redirect('flour_detail', flour.id)
@@ -83,5 +99,6 @@ def create_cart_item_flour(request, pk):
 
 def detail_card(request):
     card = Card.objects.get(user_session=request.session.get("_auth_user_hash"))
+    all_items = list(card.items.all())+list(card.flours_items.all())
 
     return render(request, 'barbol/cart.html', locals())

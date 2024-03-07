@@ -17,7 +17,7 @@
                         </div>
                             <hr class="my-4">
                       
-                          {% for cart_item in card.items.all %}
+                          {% for cart_item in all_items %}
                             <div class="row mb-4 d-flex justify-content-between align-items-center">
                               <div class="col-md-2 col-lg-2 col-xl-2">
                                 <img
@@ -32,6 +32,7 @@
                                 <h6 class="text-black mb-0">{{ cart_item.flour.title }}</h6>
                               </div>
                               <div class="col-md-3 col-lg-3 col-xl-2 d-flex" style="padding-left: 60px;">
+                                  
                                 <a href="{% url 'minus_quantity' cart_item.id %}" style="color: black; text-decoration: none; margin-right: 20px;">
                                     <h4>-</h4>
                                 </a>
@@ -41,6 +42,7 @@
                                 <a href="{% url 'pilus_quantity' cart_item.id %}" style="color: black; text-decoration: none; margin-left: 20px;">
                                     <h4>+</h4>
                                 </a>
+                                  
                               </div>
                               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                 <h6 class="mb-0">{{ cart_item.sum_quantity }}</h6>
@@ -50,13 +52,12 @@
                               </div>
                             </div>
                           {% endfor %}
-                      
                             <hr class="my-4">
                         <div class="pt-5" style="display: flex; align-items: center; justify-content: space-around;">
                           <h6 class="mb-0">
                               <a href="../index.html" class="text-body">
                               <i class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
-                            <p>{{ total_sum }}</p>
+                            <p>{{ card.get_total }}</p>
                             <a href="{% url 'order' %}" style="text-decoration: none; background-color: green; color: white; padding: 10px; border-radius: 15px;"><h4>Оформить заказ</h4></a>
                         </div>
                       </div>
